@@ -5,31 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:700&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:300,700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Exo:400,700|Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Trivia Game</title>
 </head>
 <body>
-    <div id="container">
-        <h1>Trivia Game</h1>
-        <div id="trivia">
-            <h2 id="question"></h2>
-            <div id="buttons">
+    <div class="wrapper">
+        <div id="container">
+            <h4 class="text-center text-title">Women of SciFi and Fantasy Trivia</h4>
+            <div id="trivia">
+                <div class="flex-row">
+                    <h2 id="question" class="flex-row-item"></h2>
+                    <h4 id="timer" class="flex-row-item">10</h4>
+                </div>
+                
+                <div id="buttons">
 
+                </div>
             </div>
-            <div id="timer">10</div>
-        </div>
 
-        <div id="answerScreen"></div>
+            <div id="answerScreen"></div>
 
-        <div id="result" class="hidden">
-            <h2>Score</h2>
-            <ul class="results">
-                <li id="correct"></li>
-                <li id="wrong"></li>
-            </ul>
+            <div id="result" class="hidden">
+                <h2>Score</h2>
+                <ul class="results">
+                    <li id="correct"></li>
+                    <li id="wrong"></li>
+                </ul>
+            </div>
         </div>
     </div>
+    
     <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 </html>

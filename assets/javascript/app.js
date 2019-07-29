@@ -15,7 +15,6 @@ var game = {
     correct: 0,
     wrong: 0,
     seconds: 10,
-    timerInterval: '',
     triviaCont: $('#trivia'),
     timerCont: $('#timer'),
     questionCont: $('#question'),
@@ -49,6 +48,21 @@ var game = {
     init(){
         this.nextQuestion();
     },
+    answerChecker(userAnswer){
+        if (this.currentQuestion.correct === userAnswer){
+            this.correct++;
+            this.renderScore();
+            return true;
+        } else {
+            this.wrong++;
+            this.renderScore();
+            return false;
+        }
+    },
+    renderScore(){
+        $('#correct').html('<strong>Correct</strong>: ' + this.correct);
+        $('#wrong').html('<strong>Wrong</strong>: ' + this.wrong);
+    },
     nextQuestion(){
         this.triviaCont.removeClass('hidden');
         this.answerChosen = false;
@@ -71,22 +85,9 @@ var game = {
         }
         setTimeout(function(){ game.nextQuestion(); }, 2000);
     },
-    answerChecker(userAnswer){
-      
-        if (this.currentQuestion.correct === userAnswer){
-            this.correct++;
-            this.renderScore();
-            return true;
-        } else {
-            this.wrong++;
-            this.renderScore();
-            return false;
-        }
-
-    },
-    renderScore(){
-        $('#correct').html('<strong>Correct</strong>: ' + this.correct);
-        $('#wrong').html('<strong>Wrong</strong>: ' + this.wrong);
+    finalScreen(){
+        this.resultCont.removeClass('hidden');
+        this.triviaCont.addClass('hidden');
     },
     timer(){
         this.stopTimer();
@@ -95,7 +96,7 @@ var game = {
         this.timerInterval = setInterval(this.decrement, 1000);
     },
     decrement(){
-        game.seconds--
+        game.seconds--;
         game.timerCont.text(game.seconds);
         if (game.seconds === 0 && !game.answerChosen) {
             game.stopTimer();
@@ -112,10 +113,6 @@ var game = {
     stopTimer(){
         clearInterval(this.timerInterval);
     },
-    finalScreen(){
-        this.resultCont.removeClass('hidden');
-        this.triviaCont.addClass('hidden');
-    },
     triviaGen(obj){
         this.questionCont.html(obj.question);
 
@@ -125,18 +122,13 @@ var game = {
         });
     },
     arrayRemove(arr, value) {
-
         return arr.filter(function(ele){
             return ele != value;
         });
-     
     },
     buttonHandler(event){
         this.answerChosen = true;
-
         var userAnswer = event.target.innerHTML;
-
-        
         var answer = game.answerChecker(userAnswer); 
 
         if (game.questions.length > 0){
