@@ -21,6 +21,7 @@ var game = {
     questionCont: $('#question'),
     buttonsCont: $('#buttons'),
     resultCont: $('#result'),
+    answerCont: $('#answerScreen'),
     answerChosen: false,
     questions: [
         {question: "Shuri from Black Panther invented/designed all of the following, except...", answers: ["Black Panther's Suit", "Vibranium Gauntlets", "Hover Boards", "Kimoyo Beads"], correct: "Hover Boards"},
@@ -49,7 +50,9 @@ var game = {
         this.nextQuestion();
     },
     nextQuestion(){
+        this.triviaCont.removeClass('hidden');
         this.answerChosen = false;
+        this.answerCont.html('');
         this.timer();
 
         this.buttonsCont.empty();
@@ -59,16 +62,31 @@ var game = {
         this.questions = this.arrayRemove(this.questions, this.currentQuestion);
         this.triviaGen(this.currentQuestion);
     },
+    answerScreen(answer){
+        this.triviaCont.addClass('hidden');
+        if (answer){
+            this.answerCont.text('Correct!');
+        } else if (answer === undefined || !answer){
+            this.answerCont.html('The correct answer was: ' + this.currentQuestion.correct);
+        }
+        setTimeout(function(){ game.nextQuestion(); }, 2000);
+    },
     answerChecker(userAnswer){
+      
         if (this.currentQuestion.correct === userAnswer){
             this.correct++;
-            $('#correct').html('<strong>Correct</strong>: ' + this.correct);
+            this.renderScore();
             return true;
         } else {
             this.wrong++;
-            $('#wrong').html('<strong>Wrong</strong>: ' + this.wrong);
+            this.renderScore();
             return false;
         }
+
+    },
+    renderScore(){
+        $('#correct').html('<strong>Correct</strong>: ' + this.correct);
+        $('#wrong').html('<strong>Wrong</strong>: ' + this.wrong);
     },
     timer(){
         this.stopTimer();
@@ -82,10 +100,10 @@ var game = {
         if (game.seconds === 0 && !game.answerChosen) {
             game.stopTimer();
             game.wrong++;
-            $('#wrong').html('<strong>Wrong</strong>: ' + game.wrong);
-           
+            game.renderScore();  
+
             if(game.questions.length > 0){
-                game.nextQuestion();
+                game.answerScreen(undefined);
             } else {
                 game.finalScreen();
             }
@@ -94,17 +112,6 @@ var game = {
     stopTimer(){
         clearInterval(this.timerInterval);
     },
-    // answerScreen(correct){
-    //     if (correct && this.gamePlay){
-    //         //correct answer
-    //     } else if (correct === "time" && this.gamePlay){
-    //         //times up
-    //     } else if (!correct && this.gamePlay){
-    //         //wrong answer
-    //     } else if (!this.gamePlay){
-    //         //total of wrong and right at the end
-    //     }
-    // },
     finalScreen(){
         this.resultCont.removeClass('hidden');
         this.triviaCont.addClass('hidden');
@@ -129,18 +136,15 @@ var game = {
 
         var userAnswer = event.target.innerHTML;
 
-        game.answerChecker(userAnswer); 
+        
+        var answer = game.answerChecker(userAnswer); 
 
         if (game.questions.length > 0){
-            game.nextQuestion();
+            game.stopTimer();
+            game.answerScreen(answer);
         } else {
             game.finalScreen();
-            //Total score
         }
-
-
-
-        
 
     }
 }
