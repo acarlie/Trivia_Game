@@ -21,6 +21,8 @@ var game = {
     buttonsCont: $('#buttons'),
     resultCont: $('#result'),
     answerCont: $('#answerScreen'),
+    progressBar: $('#fill'),
+    progressBarWidth: 0,
     answerChosen: false,
     questions: [
         {question: "Shuri from Black Panther invented/designed all of the following, except...", answers: ["Black Panther's Suit", "Vibranium Gauntlets", "Hover Boards", "Kimoyo Beads"], correct: "Hover Boards"},
@@ -83,7 +85,7 @@ var game = {
         } else if (answer === undefined || !answer){
             this.answerCont.html('The correct answer was: ' + this.currentQuestion.correct);
         }
-        setTimeout(function(){ game.nextQuestion(); }, 2000);
+        setTimeout(function(){ game.nextQuestion(); }, 3000);
     },
     finalScreen(){
         this.resultCont.removeClass('hidden');
@@ -98,6 +100,9 @@ var game = {
     decrement(){
         game.seconds--;
         game.timerCont.text(game.seconds);
+        game.progressBarWidth += 10;
+        game.progressBar.css('width', game.progressBarWidth + '%');
+
         if (game.seconds === 0 && !game.answerChosen) {
             game.stopTimer();
             game.wrong++;
@@ -111,6 +116,8 @@ var game = {
         }
     },
     stopTimer(){
+        game.progressBarWidth = 0;
+        game.progressBar.css('width', game.progressBarWidth + '%');
         clearInterval(this.timerInterval);
     },
     triviaGen(obj){

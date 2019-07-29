@@ -40,23 +40,44 @@ h4{
 }
 
 #question{
-    border-right: 1px solid var(--color-primary-dim);
+    border-bottom: 1px solid var(--color-primary-dim);
 }
 
 #timer{
-    border-bottom: 1px solid var(--color-primary-dim);
+    border-right: 1px solid var(--color-primary-dim);
+    background: var(--color-primary-dim);
+    color: var(--color-dark-dk);
     line-height: 100%;
     align-self: flex-start;
     text-align: center;
     min-width: 3em;
 }
 
-.flex-row{
-    display: flex;
+#fill{
+    width: 0%;
+    background: var(--color-primary-dim);
+    height: 100%;
+    transition: width 1s linear;
+}
+
+.cont{
     border: 1px solid var(--color-primary-dim);
 }
 
-.flex-row-item{
+#bar{
+    width: 100%;
+}
+
+.flex-row{
+    display: flex;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-item{
     padding: 1em;
 }
 
