@@ -1,5 +1,5 @@
 var game = {
-    seconds: 10,
+    seconds: 20,
     triviaCont: $('#trivia'),
     timerCont: $('#timer'),
     questionCont: $('#question'),
@@ -86,21 +86,21 @@ var game = {
         var correct = $('<h5>').text('Correct: ' + this.correct + '/' + this.questionCount);
         var outOfTime = $('<h5>').text('Unanswered: ' + this.unanswered + '/' + this.questionCount);;
         var wrong = $('<h5>').text('Incorrect: ' + this.wrong + '/' + this.questionCount);
-        var percent = $('<h3>').text('Final Score: ' + this.correct / this.questionCount*100 + '%');
+        var percent = $('<h3>').text('Final Score: ' + Math.round(this.correct / this.questionCount * 100) + '%');
         var restart = $('<button>').attr('id', 'restart').addClass('btn btn-restart').text('Play Again?');
         resultsWrap.append(percent, correct, outOfTime, wrong);
         this.resultCont.append(resultsWrap, restart);
     },
     timer(){
         this.stopTimer();
-        this.seconds = 10;
+        this.seconds = 20;
         game.timerCont.text(game.seconds);
         this.timerInterval = setInterval(this.decrement, 1000);
     },
     decrement(){
         game.seconds--;
         game.timerCont.text(game.seconds);
-        game.progressBarWidth += 10;
+        game.progressBarWidth += 5;
         game.progressBar.css('width', game.progressBarWidth + '%');
 
         if (game.seconds === 0 && !game.answerChosen) {
