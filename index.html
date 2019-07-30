@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:300,700&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Exo:400,700|Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,31 +14,29 @@
     <div class="wrapper">
         <div id="container">
             <h4 class="text-center text-title">Women of SciFi and Fantasy Trivia</h4>
-            <div id="trivia">
-                <div class="cont flex-col">
-                    <h2 id="question" class="flex-item"></h2>
-                    <div class="flex-row">
-                        <h4 id="timer" class="flex-item">10</h4>
-                        <div id="bar">
-                            <div id="fill"></div>
-                        </div>
+            <div class="cont">
+                    <div id="trivia">
+                            <div class="flex-col">
+                                <h2 id="question" class="flex-item"></h2>
+                                <div class="flex-row">
+                                    <h4 id="timer" class="flex-item">10</h4>
+                                    <div id="bar">
+                                        <div id="fill"></div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                </div>
-                
-                <div id="buttons">
+                    <div id="answerScreen"></div>
 
-                </div>
+                    <div id="result" class="hidden text-center flex-col">
+               
+                    </div>
             </div>
+          
+            <div id="buttons">
 
-            <div id="answerScreen"></div>
-
-            <div id="result" class="hidden">
-                <h2>Score</h2>
-                <ul class="results">
-                    <li id="correct"></li>
-                    <li id="wrong"></li>
-                </ul>
             </div>
+            
         </div>
     </div>
     
